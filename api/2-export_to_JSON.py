@@ -7,23 +7,25 @@ import requests
 from sys import argv
 
 if __name__ == "__main__":
-
+    """
+        request user info by employee ID
+    """
     request_employee = requests.get(
         'https://jsonplaceholder.typicode.com/users/{}/'.format(argv[1]))
-    """
-        convert json to dictionary
-    """
+
     user = json.loads(request_employee.text)
 
     username = user.get("username")
 
     request_todos = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1])
+        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1]))
 
     tasks = {}
 
-    user_todos = json.loads(request_todos.text
-
+    user_todos = json.loads(request_todos.text)
+    """
+        loop through dictionary & get completed tasks
+    """
     for dictionary in user_todos:
         tasks.update({dictionary.get("title"): dictionary.get("completed")})
 
